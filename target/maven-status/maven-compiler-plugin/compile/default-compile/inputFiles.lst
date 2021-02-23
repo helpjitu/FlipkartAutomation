@@ -1,0 +1,13 @@
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/actions/HomePage.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/locators/SignInPageLocators.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/base/Constants.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/base/Page.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/actions/SignInPage.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/utilities/ExcelReader.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/locators/SearchPageLocators.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/utilities/Logs.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/utilities/Utilities.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/actions/SearchPage.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/page/locators/HomePageLocators.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/com/App.java
+/home/jitendra/IdeaProjects/ShoppingProject/src/main/java/reporter/ExtentManager.java
