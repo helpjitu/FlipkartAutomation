@@ -45,7 +45,7 @@ public class Page extends Logs {
 		LOGGER.info("Clicking on an Element: " + element);
 	}
 
-	public static void type(WebElement element, String value) {
+	public static void type(@org.jetbrains.annotations.NotNull WebElement element, String value) {
 		element.sendKeys(value);
 		LOGGER.info("Entering the value as: " + value + " for the element: " + element);
 	}
@@ -66,11 +66,9 @@ public class Page extends Logs {
 				prop.load(file);
 				return prop;
 			} catch (IOException e) {
-                // TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return prop;
