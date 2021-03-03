@@ -8,6 +8,7 @@ public class GitTest {
 	{
 		System.out.println("check git");
 		System.out.println("check from eclipse");
+		System.out.println("Check git ignore file");
 	}
 
 }
