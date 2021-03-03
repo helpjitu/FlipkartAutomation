@@ -22,15 +22,23 @@ public class Page extends Logs {
 	public static ExcelReader excel = new ExcelReader(
 			System.getProperty("user.dir") + "/src/test/resources/excel/testdata.xlsx");
 	public static Properties prop;
+	public static String OS = System.getProperty("os.name").toLowerCase();
 
 	public static void initConfiguration() {
-		if (Constants.browser.equalsIgnoreCase("chrome")) {
+		if(OS.contains("windows"))
+		{
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "/src/test/resources/driver/chromedriver.exe");
+		}
+		else
+		{
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "/src/test/resources/driver/chromedriver");
-			driver = new ChromeDriver();
-			LOGGER.debug("Launching Chrome");
-
 		}
+
+		driver = new ChromeDriver();
+		LOGGER.debug("Launching Chrome");
+
 		driver.get(Constants.testSiteUrl);
 		driver.manage().window().maximize();
 //		driver.switchTo().defaultContent();
