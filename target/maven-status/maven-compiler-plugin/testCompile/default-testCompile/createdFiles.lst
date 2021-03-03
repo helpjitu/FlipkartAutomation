@@ -1,0 +1,11 @@
+com\HomepageTest.class
+pageFactory\SigninPage.class
+com\MySqlConTest.class
+base\Base.class
+com\PdfHandlingTest.class
+com\GitTest.class
+com\SignInTest.class
+com\AppTest.class
+com\SignUpTest.class
+runner\TestRunner.class
+com\SearchProductTest.class
