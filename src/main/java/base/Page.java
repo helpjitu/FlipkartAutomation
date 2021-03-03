@@ -1,12 +1,8 @@
 package base;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 import utilities.ExcelReader;
 import utilities.Logs;
@@ -41,11 +37,8 @@ public class Page extends Logs {
 
 		driver.get(Constants.testSiteUrl);
 		driver.manage().window().maximize();
-//		driver.switchTo().defaultContent();
-//		Actions actions = new Actions(driver);
-//		actions.click().sendKeys(Keys.ESCAPE).perform();
 
-	}
+    }
 
 	public static void clickElement(WebElement element) {
 		element.click();
@@ -73,7 +66,7 @@ public class Page extends Logs {
 				prop.load(file);
 				return prop;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+                // TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
