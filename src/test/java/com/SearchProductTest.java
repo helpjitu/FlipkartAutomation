@@ -19,12 +19,15 @@ public class SearchProductTest extends Page {
             throw new SkipException("Skipping the test as the Run mode is NO");
         }
         else {
-            initConfiguration();
-            SignInPage signInPage=new SignInPage();
-            signInPage.doLogin(data.get("username"),data.get("password"));
-            SearchPage searchPage=new SearchPage();
-            searchPage.searchProduct(data.get("productName"));
-            Thread.sleep(3000);
+        //    initConfiguration();
+            if (initConfiguration())
+            {
+                SignInPage signInPage=new SignInPage();
+                signInPage.doLogin(data.get("username"),data.get("password"));
+                SearchPage searchPage=new SearchPage();
+                searchPage.searchProduct(data.get("productName"));
+                Thread.sleep(3000);
+            }
         }
     }
     @AfterMethod

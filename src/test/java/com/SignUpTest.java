@@ -18,10 +18,11 @@ public class SignUpTest extends Page {
             throw new SkipException("Sign Up Skipped as the runmode is No");
         }
         else {
-            initConfiguration();
-            SignInPage signUp = new SignInPage();
-            signUp.doSignUp(data.get("username"));
-            Thread.sleep(5000);
+            if (initConfiguration()) {
+                SignInPage signUp = new SignInPage();
+                signUp.doSignUp(data.get("username"));
+                Thread.sleep(5000);
+            }
         }
 
     }

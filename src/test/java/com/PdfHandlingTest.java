@@ -1,48 +1,51 @@
 package com;
 
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
+import base.Page;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.junit.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.testng.annotations.AfterTest;
-import base.Base;
-
-public class PdfHandlingTest extends Base{
+public class PdfHandlingTest extends Page {
 		
 	@BeforeClass
-	public static void setup()
+	public void setup()
 	{
-		initiateDriver(loadProp().getProperty("browser"));
+		initBrowser();
 	}
 	
 	@Test
-	public void verifyContentInPDf() throws InterruptedException {
+	public void verifyContentInPDf() {
 		//specify the url of the pdf file
-		String url ="http://www.pdf995.com/samples/pdf.pdf";
-		driver.get(url);
-		try {
-			String pdfContent = readPdfContent(url);
-			AssertJUnit.assertTrue(pdfContent.contains("The Pdf995 Suite offers the following features"));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (initConfiguration())
+		{
+			String url="http://www.pdf995.com/samples/pdf.pdf";
+			openUrl(url);
+			try {
+				String pdfContent = readPdfContent(url);
+				Assert.assertTrue(pdfContent.contains("The Pdf995 Suite offers the following features"));
+				//		AssertJUnit.assertTrue(pdfContent.contains("The Pdf995 Suite offers the following features"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+
 	}
 	
-	@AfterMethod
 	@AfterTest
 	public void tearDown() {
-		driver.quit();
+		if (driver!=null)
+		{
+			driver.quit();
+		}
 	}
 	
 	
@@ -62,9 +65,7 @@ public class PdfHandlingTest extends Base{
 	
 	public static int getPageCount(PDDocument doc) {
 		//get the total number of pages in the pdf document
-		int pageCount = doc.getNumberOfPages();
-		return pageCount;
-		
+		return doc.getNumberOfPages();
 	}
 
 }

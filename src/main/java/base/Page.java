@@ -3,14 +3,15 @@ package base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.ExcelReader;
 import utilities.Logs;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Properties;
 
 public class Page extends Logs {
@@ -20,7 +21,7 @@ public class Page extends Logs {
 	public static Properties prop;
 	public static String OS = System.getProperty("os.name").toLowerCase();
 
-	public static void initConfiguration() {
+	public static boolean initConfiguration() {
 		if(OS.contains("windows"))
 		{
 			System.setProperty("webdriver.chrome.driver",
@@ -31,14 +32,55 @@ public class Page extends Logs {
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "/src/test/resources/driver/chromedriver");
 		}
+		if(isInternetConnected() == true)
+		{
+			driver = new ChromeDriver();
+			LOGGER.debug("Launching Chrome");
 
-		driver = new ChromeDriver();
-		LOGGER.debug("Launching Chrome");
+			driver.get(Constants.testSiteUrl);
+			driver.manage().window().maximize();
+			return true;
+		}
+		else {
+			LOGGER.error("Internet is not connected");
+			Assert.fail();
+			return false;
+		}
 
-		driver.get(Constants.testSiteUrl);
-		driver.manage().window().maximize();
 
     }
+
+    public static void openUrl(String URL)
+	{
+		if (driver!=null)
+		{
+			driver.get(URL);
+			driver.manage().window().maximize();
+		}
+	}
+
+    public static WebDriver initBrowser()
+	{
+		if(OS.contains("windows"))
+		{
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "/src/test/resources/driver/chromedriver.exe");
+		}
+		else
+		{
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "/src/test/resources/driver/chromedriver");
+		}
+		if(isInternetConnected() == true) {
+			driver = new ChromeDriver();
+			LOGGER.debug("Launching Chrome");
+		}
+		else
+		{
+			LOGGER.debug("Internet not Connected");
+		}
+		return driver;
+	}
 
 	public static void clickElement(WebElement element) {
 		element.click();
@@ -50,7 +92,7 @@ public class Page extends Logs {
 		LOGGER.info("Entering the value as: " + value + " for the element: " + element);
 	}
 
-	public static void tearDown() {
+	public void tearDown() {
 		if (driver != null) {
 			driver.quit();
 		}
@@ -74,10 +116,30 @@ public class Page extends Logs {
 		return prop;
 	}
 
-	@Test
-	public void testLog()
+	public static boolean isInternetConnected()
 	{
-		LOGGER.info("Test");
+		try {
+			URL url = new URL("http://www.google.com");
+			URLConnection connection = url.openConnection();
+			connection.connect();
+			System.out.println("Internet is connected");
+			return true;
+		} catch (IOException e) {
+			System.out.println("Internet is not connected");
+			return false;
+		}
 	}
 
+	public static void writeToFile(String dataToWrite)
+	{
+		try{
+			FileWriter fstream = new FileWriter("test-output/Logs/Application.log",true);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(dataToWrite+"\n");
+			out.close();
+		}catch (Exception e){
+			System.err.println("Error while writing to file: " +
+					e.getMessage());
+		}
+	}
 }

@@ -23,9 +23,10 @@ public class SignInTest extends Page{
 			throw new SkipException("Skipping the test as the Run mode is NO");
 		}
 		else {
-			initConfiguration();
-			SignInPage signIn = new SignInPage();
-			signIn.doLogin(data.get("username"), data.get("password"));
+			if (initConfiguration()) {
+				SignInPage signIn = new SignInPage();
+				signIn.doLogin(data.get("username"), data.get("password"));
+			}
 		}
 	}
 	

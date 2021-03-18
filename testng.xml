@@ -6,9 +6,9 @@
       <class name="com.MySqlConTest"/>
       <class name="com.HomepageTest"/>
       <class name="com.PdfHandlingTest"/>
-       <class name="com.SignInTest"/>
+      <class name="com.SignInTest"/>
       <class name="com.SignUpTest"/>
-      <class name="com.SearchProductTest"/>
+     <class name="com.SearchProductTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
